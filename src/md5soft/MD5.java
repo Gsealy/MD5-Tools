@@ -153,7 +153,7 @@ public class MD5 extends javax.swing.JFrame {
             answer.setText("");
             }
             else{
-            //utf-8->iso-8859-1
+            //中文识别问题 utf-8->iso-8859-1 
             String cont = new String(cont1.getBytes("utf-8"), "ISO-8859-1");
             String str2;
             str2 = MD5_text_sum.main(cont);
