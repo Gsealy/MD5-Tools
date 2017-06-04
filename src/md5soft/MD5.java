@@ -6,16 +6,19 @@
 package md5soft;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.channels.FileChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 /**
- *
+ * @version 1.0
  * @author Gsealy
  */
 public class MD5 extends javax.swing.JFrame {
@@ -143,12 +146,20 @@ public class MD5 extends javax.swing.JFrame {
             // 文本MD5计算
             String cont1 = null;
             cont1 = MD5text.getText();
+            if(cont1.equals("")){
+            JOptionPane.showMessageDialog(null, "您没有输入任何内容，请重新输入字符串", "ERROR！",
+              JOptionPane.ERROR_MESSAGE);
+            MD5text.setText("");
+            answer.setText("");
+            }
+            else{
             //utf-8->iso-8859-1
             String cont = new String(cont1.getBytes("utf-8"), "ISO-8859-1");
             String str2;
             str2 = MD5_text_sum.main(cont);
             answer.setText("文本MD5 : \n" + str2);
-            MD5text.setText("");
+            }
+            //MD5text.setText("");
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(MD5.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Throwable ex) {
@@ -164,13 +175,17 @@ public class MD5 extends javax.swing.JFrame {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
+            String filename = fileChooser.getSelectedFile().getName();
+            FileChannel fc = null;
             choosetext.setText(file.getAbsolutePath());
             String cont3 = null;
             cont3 = choosetext.getText();
             try {
+                FileInputStream fis = new FileInputStream(file);
+                fc = fis.getChannel();
                 String str4 = MD5_file_sum.fileMD5(cont3);
-                answer.setText("文件MD5 : \n" + str4);
-                choosetext.setText("");
+                answer.setText("文件名 ：" + filename + "\n大小 ：" + fc.size() 
+                        + " Byte" + "\n文件MD5 : " + str4);
             } catch (IOException ex) {
                 Logger.getLogger(MD5.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -6,6 +6,7 @@
 package md5soft;
 
 import java.io.UnsupportedEncodingException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -187,15 +188,8 @@ public class MD5_text_sum {
     ;
      
     public static String main(String str) throws UnsupportedEncodingException, Throwable {
-        if (str.equals("")) {
-            String str1 = MD5_text_sum.getInstance().getMD5(str);
-            System.out.println(str1);
-            return "请输入字符串！\nNULL MD5 :" + str1;
-        } else {
             String str1 = MD5_text_sum.getInstance().getMD5(str);
             System.out.println(str1);
             return str1;
-        }
     }
-
 }
