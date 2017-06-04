@@ -144,6 +144,7 @@ public class MD5 extends javax.swing.JFrame {
     private void submitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitMouseClicked
         try {
             // 文本MD5计算
+            choosetext.setText("");
             String cont1 = null;
             cont1 = MD5text.getText();
             if(cont1.equals("")){
