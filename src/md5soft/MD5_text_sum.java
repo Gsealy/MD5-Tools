@@ -14,14 +14,6 @@ import javax.swing.JOptionPane;
  */
 public class MD5_text_sum {
 
-    private static void toHex(char[] toCharArray) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private static void toHex(byte[] utf8) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /*
     *四个链接变量
      */
