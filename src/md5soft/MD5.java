@@ -124,7 +124,7 @@ public class MD5 extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(7, 7, 7)
                     .addComponent(jLabel1)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -134,7 +134,7 @@ public class MD5 extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(MD5text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(submit))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(18, 18, 18)
                     .addComponent(jLabel2))
             );
 
@@ -147,18 +147,17 @@ public class MD5 extends javax.swing.JFrame {
             choosetext.setText("");
             String cont1 = null;
             cont1 = MD5text.getText();
-            if(cont1.equals("")){
-            JOptionPane.showMessageDialog(null, "您没有输入任何内容，请重新输入字符串", "ERROR！",
-              JOptionPane.ERROR_MESSAGE);
-            MD5text.setText("");
-            answer.setText("");
-            }
-            else{
-            //中文识别问题 utf-8->iso-8859-1 
-            String cont = new String(cont1.getBytes("utf-8"), "ISO-8859-1");
-            String str2;
-            str2 = MD5_text_sum.main(cont);
-            answer.setText("文本MD5 : \n" + str2);
+            if (cont1.equals("")) {
+                JOptionPane.showMessageDialog(null, "您没有输入任何内容，请重新输入字符串", "ERROR！",
+                        JOptionPane.ERROR_MESSAGE);
+                MD5text.setText("");
+                answer.setText("");
+            } else {
+                //中文识别问题 utf-8->iso-8859-1 
+                String cont = new String(cont1.getBytes("utf-8"), "ISO-8859-1");
+                String str2;
+                str2 = MD5_text_sum.main(cont);
+                answer.setText("文本MD5 : \n" + str2);
             }
             //MD5text.setText("");
         } catch (UnsupportedEncodingException ex) {
@@ -185,7 +184,7 @@ public class MD5 extends javax.swing.JFrame {
                 FileInputStream fis = new FileInputStream(file);
                 fc = fis.getChannel();
                 String str4 = MD5_file_sum.fileMD5(cont3);
-                answer.setText("文件名 ：" + filename + "\n大小 ：" + fc.size() 
+                answer.setText("文件名 ：" + filename + "\n大小 ：" + fc.size()
                         + " Byte" + "\n文件MD5 : " + str4);
             } catch (IOException ex) {
                 Logger.getLogger(MD5.class.getName()).log(Level.SEVERE, null, ex);
