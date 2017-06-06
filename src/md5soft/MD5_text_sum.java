@@ -27,7 +27,7 @@ public class MD5_text_sum {
 
     /*
     *常量ti
-    *公式:floor(abs(sin(i+1))×(2pow32)
+    *公式:floor(abs(sin(i))×(2pow32)
      */
     private final int K[] = {
         0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
@@ -95,6 +95,8 @@ public class MD5_text_sum {
             int tmp = d;
             d = c;
             c = b;
+            //a:需要做移位变换的数,F:非线性函数,K:文本的子分组,M消息的第j个子分组,
+            //s:移动位数
             b = b + shift(a + F + K[i] + M[g], s[i]);
             a = tmp;
         }
@@ -111,8 +113,7 @@ public class MD5_text_sum {
     *填充方式为先加一个0,其它位补零
     *最后加上64位的原来长度
      */
-    private int[] add(String str) throws UnsupportedEncodingException {
-        //System.out.println(str);
+    private int[] add(String str){
         int num = ((str.length() + 8) / 64) + 1;//以512位，64个字节为一组
         int strByte[] = new int[num * 16];//64/4=16，所以有16个整数
         for (int i = 0; i < num * 16; i++) {//全部初始化0
