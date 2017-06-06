@@ -113,7 +113,7 @@ public class MD5_text_sum {
     *填充方式为先加一个0,其它位补零
     *最后加上64位的原来长度
      */
-    private int[] add(String str){
+    private int[] add(String str) {
         int num = ((str.length() + 8) / 64) + 1;//以512位，64个字节为一组
         int strByte[] = new int[num * 16];//64/4=16，所以有16个整数
         for (int i = 0; i < num * 16; i++) {//全部初始化0
@@ -179,9 +179,8 @@ public class MD5_text_sum {
 
     ;
      
-    public static String main(String str) throws UnsupportedEncodingException, Throwable {
-            String str1 = MD5_text_sum.getInstance().getMD5(str);
-            System.out.println(str1);
-            return str1;
+    public static String main(String str) throws UnsupportedEncodingException{
+        String str1 = MD5_text_sum.getInstance().getMD5(str);
+        return str1;
     }
 }
