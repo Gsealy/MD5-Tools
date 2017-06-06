@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 public class MD5_text_sum {
 
     /*
-    *四个链接变量
+    *四个寄存器
      */
     private final int A = 0x67452301;
     private final int B = 0xefcdab89;
