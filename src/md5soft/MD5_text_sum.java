@@ -6,7 +6,6 @@
 package md5soft;
 
 import java.io.UnsupportedEncodingException;
-import javax.swing.JOptionPane;
 
 /**
  *
