@@ -26,7 +26,7 @@ public class MD5_text_sum {
     private int Atemp, Btemp, Ctemp, Dtemp;
 
     /*
-    *常量ti
+    *常量ti 1 <= i <= 64
     *公式:floor(abs(sin(i))×(2pow32)
      */
     private final int K[] = {
@@ -104,7 +104,6 @@ public class MD5_text_sum {
         Btemp = b + Btemp;
         Ctemp = c + Ctemp;
         Dtemp = d + Dtemp;
-
     }
 
     /*
@@ -121,12 +120,14 @@ public class MD5_text_sum {
         }
         int i;
         for (i = 0; i < str.length(); i++) {
-            strByte[i >> 2] |= str.charAt(i) << ((i % 4) * 8);//一个整数存储四个字节，小端序
+            strByte[i >> 2] |= str.charAt(i) << ((i % 4) * 8);
+            //一个整数存储四个字节，小端序
         }
         strByte[i >> 2] |= 0x80 << ((i % 4) * 8);//尾部添加1
         /*
-        *添加原长度，长度指位的长度，所以要乘8，然后是小端序，所以放在倒数第二个,这里长度只用了32位
-         */
+        *添加原长度，长度指位的长度，所以要乘8，然后是小端序，所以放在倒数第二个,
+        这里长度只用了32位
+        **/
         strByte[num * 16 - 2] = str.length() * 8;
         return strByte;
     }
@@ -136,7 +137,6 @@ public class MD5_text_sum {
      */
     public String getMD5(String source) throws UnsupportedEncodingException {
         init();
-
         int strByte[] = add(source);
         for (int i = 0; i < strByte.length / 16; i++) {
             int num[] = new int[16];
@@ -145,7 +145,8 @@ public class MD5_text_sum {
             }
             MainLoop(num);
         }
-        return changeHex(Atemp) + changeHex(Btemp) + changeHex(Ctemp) + changeHex(Dtemp);
+        return changeHex(Atemp) + changeHex(Btemp) + changeHex(Ctemp) 
+                + changeHex(Dtemp);
     }
 
     /*
@@ -154,8 +155,8 @@ public class MD5_text_sum {
     private String changeHex(int a) {
         String str = "";
         for (int i = 0; i < 4; i++) {
-            str += String.format("%2s", Integer.toHexString(((a >> i * 8) % (1 << 8)) & 0xff)).replace(' ', '0');
-
+            str += String.format("%2s", Integer.toHexString(((a >> i * 8) % (1 << 8))
+                    & 0xff)).replace(' ', '0');
         }
         return str;
     }
